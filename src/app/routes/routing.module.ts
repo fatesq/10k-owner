@@ -7,8 +7,12 @@ import { OrderListComponent } from './orderList/orderList.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'list', component: OrderListComponent },
+  { path: 'home', component: HomeComponent,
+    children: [
+      { path: '', redirectTo: 'list', pathMatch: 'full' },
+      { path: 'list', component: OrderListComponent },
+    ]
+  },
 ];
 
 @NgModule({
