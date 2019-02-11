@@ -1,0 +1,18 @@
+{
+    "/": {
+        "target": "https://api.qinhemili.com",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/": ""
+        }
+    },
+    "https://api.qinhemili.com": {
+        "target": "https://api.qinhemili.com",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/": ""
+        }
+    }
+}

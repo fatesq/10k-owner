@@ -1,0 +1,75 @@
+<div class="top">
+  <div class="name">业务员: </div>
+  <div class="out">退出</div>
+</div>
+<TabBar
+  class="tab"
+  [barTintColor]="'white'"
+  [tintColor]="tintColor"
+  [unselectedTintColor]="unselectedTintColor"
+  [activeTab]="1"
+  [tabBarPosition]="'bottom'"
+>
+  <TabPane [title]='custom1'>
+    <ng-template #custom1>
+      <TabBarTab 
+        [title]="'订车订单'"
+        [key]="1"
+        [icon]="icon1"
+        (onPress)="onPress($event)"
+        [selectedIcon]="icon11"
+      >
+        <ng-template #icon1>
+          <div style="width:22px;height: 22px;background: url('https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg') center center / 21px 21px no-repeat;">
+          </div>
+        </ng-template>
+        <ng-template #icon11>
+          <div style="width:22px;height: 22px;background: url('https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg') center center / 21px 21px no-repeat;">
+          </div>
+        </ng-template>
+      </TabBarTab>
+    </ng-template>
+    <ng-container>
+      <ng-template [ngTemplateOutlet]="content"></ng-template>
+    </ng-container>
+  </TabPane>
+  <TabPane [title]='custom2'>
+    <ng-template #custom2>
+      <TabBarTab 
+        [title]="'取车订单'"
+        [key]="2"
+        [icon]="icon2"
+        [selectedIcon]="icon22"
+      >
+        <ng-template #icon2>
+          <div style="width:22px;height: 22px;background: url('https://gw.alipayobjects.com/zos/rmsportal/BTSsmHkPsQSPTktcXyTV.svg') center center / 21px 21px no-repeat;">
+          </div>
+        </ng-template>
+        <ng-template #icon22>
+          <div style="width:22px;height: 22px;background: url('https://gw.alipayobjects.com/zos/rmsportal/ekLecvKBnRazVLXbWOnE.svg') center center / 21px 21px no-repeat;">
+          </div>
+        </ng-template>
+      </TabBarTab>
+    </ng-template>
+    <ng-container>
+      <ng-template [ngTemplateOutlet]="content"></ng-template>
+    </ng-container>
+  </TabPane>
+</TabBar>
+
+<ng-template #content>
+  <Tabs 
+    [useOnPan]="true"
+    [swipeable]="true"
+    [activeTab]="index"
+    [page]="3"
+    tabBarBackgroundColor="#274EFF"
+    tabBarActiveTextColor="#FFF"
+    tabBarInactiveTextColor="#5288FF"
+    tabBarUnderlineStyle="color:#FFF"
+  >
+    <TabPane class="select" title="预约订单"></TabPane>
+    <TabPane class="select" title="已付款订单"></TabPane>
+    <TabPane class="select" title="已完成"></TabPane>
+  </Tabs>
+</ng-template>
