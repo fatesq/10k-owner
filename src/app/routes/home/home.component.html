@@ -7,14 +7,14 @@
   [barTintColor]="'white'"
   [tintColor]="tintColor"
   [unselectedTintColor]="unselectedTintColor"
-  [(activeTab)]="activeTab"
+  [activeTab]="0"
   [tabBarPosition]="'bottom'"
 >
   <TabPane [title]='custom1'>
     <ng-template #custom1>
       <TabBarTab 
         [title]="'订车订单'"
-        [key]="1"
+        key="orderlist"
         [icon]="icon1"
         (onPress)="onPress($event)"
         [selectedIcon]="icon11"
@@ -37,7 +37,7 @@
     <ng-template #custom2>
       <TabBarTab 
         [title]="'取车订单'"
-        [key]="2"
+        key="overlist"
         [icon]="icon2"
         [selectedIcon]="icon22"
         (onPress)="onPress($event)"
@@ -60,6 +60,24 @@
 
 <ng-template #content>
   <Tabs
+    *ngIf="activeTab == 'orderlist'"
+    style="height: 50px"
+    [useOnPan]="true"
+    [swipeable]="true"
+    [activeTab]="0"
+    [page]="3"
+    tabBarBackgroundColor="#274EFF"
+    tabBarActiveTextColor="#FFF"
+    tabBarInactiveTextColor="#5288FF"
+    tabBarUnderlineStyle="color:#FFF"
+    (onChange)="onChange($event)"
+  >
+    <TabPane class="select" title="预约订单"></TabPane>
+    <TabPane class="select" title="已付款订单"></TabPane>
+    <TabPane class="select" title="已完成"></TabPane>
+  </Tabs>
+  <Tabs
+    *ngIf="activeTab == 'overlist'"
     style="height: 50px"
     [useOnPan]="true"
     [swipeable]="true"
@@ -69,9 +87,10 @@
     tabBarActiveTextColor="#FFF"
     tabBarInactiveTextColor="#5288FF"
     tabBarUnderlineStyle="color:#FFF"
+    (onChange)="onChange($event)"
   >
-    <TabPane class="select" title="预约订单"></TabPane>
-    <TabPane class="select" title="已付款订单"></TabPane>
+    <TabPane class="select" title="预约取车"></TabPane>
+    <TabPane class="select" title="取车订单"></TabPane>
     <TabPane class="select" title="已完成"></TabPane>
   </Tabs>
   <router-outlet></router-outlet>

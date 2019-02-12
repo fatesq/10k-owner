@@ -1,0 +1,22 @@
+<div class="list">
+  <div class="item" *ngFor="let i of list" routerLink="/over" [queryParams]='{code: i.code}'>
+    <div class="header">
+      <div class="no">{{i.code}} {{i.createTime}}</div>
+      <div class="status">已提交</div>
+    </div>
+    <div class="title">
+      <div>客户名 {{i.user.realName}}</div>
+      <div style="color:rgba(236,192,131,1);">待付尾款: {{i.totalRePrice > 0 ? i.totalRePrice + '万': '价格电议'}}</div>
+    </div>
+    <div class="info">
+      <p>取车时间: {{i.verifySite}}</p>
+      <p>取车地点: {{i.verifyTime}}</p>
+      <div *ngFor="let o of i.getOrderCar;let index = index" style="display:flex;align-items: center">
+        <p style="width: 68px;">{{index==0?'取车信息:':''}}</p>
+        {{i.verifyTime}}
+      </div>
+    </div>
+    <h5 style="color:rgba(81,81,81,1);">业务员: {{i.saleName}}</h5>
+  </div>
+</div>
+  

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -6,16 +7,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.less']
 })
 export class HomeComponent implements OnInit {
-  activeTab = 0;
+  activeTab = 'orderlist';
   index = 0;
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit() {
   }
 
   onPress(e) {
-    this.index = 0;
-    console.log(this.activeTab, this.index);
+    this.activeTab = e.key;
+    this.router.navigateByUrl(`/home/${e.key}/0`);
+  }
+
+  onChange(e) {
+    this.router.navigateByUrl(`/home/${this.activeTab}/${e.index}`);
   }
 
 }

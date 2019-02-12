@@ -4,11 +4,11 @@ import { ActivatedRoute, ParamMap  } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-order-list',
-  templateUrl: './orderList.component.html',
-  styleUrls: ['./orderList.component.less']
+  selector: 'app-over-list',
+  templateUrl: './overList.component.html',
+  styleUrls: ['./overList.component.less']
 })
-export class OrderListComponent implements OnInit {
+export class OverListComponent implements OnInit {
   list = [];
   status = '0';
   constructor(
@@ -25,10 +25,11 @@ export class OrderListComponent implements OnInit {
   }
 
   getInfo() {
-    this.api.reserveList({
+    this.api.getOrderList({
       sid: localStorage['uid'],
-      status: this.status
+      status: 0
     }).subscribe(res => {
+      console.log(res)
       if (res['code'] == 200) {
         this.list = res['data'];
       }

@@ -1,0 +1,74 @@
+<div class="body">
+  <div class="container">
+    <div class="line order-line clearfix">
+      <div class="order">订单编号：{{info.code}}</div>
+      <div class="time">{{info.createTime}}</div>
+    </div>
+    <div class="order-status">
+    </div>
+    <div class="order-box fz24">
+      <div class="line">
+          <div class="title">客户信息</div>
+          <div class="des">{{info.user.realName}}</div>
+      </div>
+      <div class="line">
+          <div class="title">联系电话</div>
+          <div class="des">{{info.user.phone}}</div>
+      </div>
+      <div class="line">
+          <div class="title">已预付款</div>
+          <div class="des" style="color: #FF7800">{{info.totalPrice == 0 ? '价格电议' : info.totalCutPrice}}<span *ngIf="info.totalPrice != 0">(全款{{info.totalPrice}}万)</span></div>
+      </div>
+    </div>
+    <div class="order-box fz24" style="margin-top: 15px">
+      <!-- <h3 style="padding: 10px 16px;font-size: 18px">取车信息</h3> -->
+      <div class="line" Picker [(ngModel)]="ratio" [data]="select" cols="1" (ngModelChange)="onSelect($event)">
+          <div class="title">订单状态</div>
+          <div class="des" style="color: #274EFF">{{select[info.status].label}}</div>
+      </div>
+      <div class="line" DatePicker [mode]="'datetime'" [minDate]="minDate" (onOk)="onOk1($event)">
+        <div class="title">取车时间</div>
+        <div class="des" style="color: #274EFF">{{info.verifyTime}}</div>
+      </div>
+      <div class="line" (click)="modal1 = true">
+        <div class="title">取车地点</div>
+        <div class="des" style="color: #274EFF">{{info.verifySite}}</div>
+      </div>
+    </div>
+
+    <div class="border"></div>
+
+    <div class="list-box">
+      <div class="title">取车清单</div>
+      <div class="box" *ngFor="let i of cars;let index = index">
+        <div class="head">
+          <h4 class="left">{{i.modelName}}</h4>
+          <span class="right">指导价: {{i.guidePrice}}万</span>
+        </div>
+        <h5 class="line">外观: {{i.plasticColor}}  内饰: {{i.trimColor}}</h5>
+        <div class="stepper">
+          <div class="label" *ngIf="i.cutPrice > 0"><span style="color: #FF7800;font-size: 16px">尾款: {{i.cutPrice}}万</span> 全款{{i.price}}万</div>
+          <div class="label" *ngIf="i.cutPrice == 0"><span style="color: #FF7800;font-size: 16px">电议</span></div>
+          <div class="set">
+            <!-- <div style="flex:1">
+              <img class="ic" (click)="del(index)" src="../../../assets/db/icon_decrease_nor.png"/>
+            </div> -->
+            <span style="flex: 1"> {{i.amount}}辆</span>
+            <!-- <div style="flex:1">
+              <img class="ic" (click)="add(index)" src="../../../assets/db/icon_incarease_nor.png"/>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<Modal [(ngModel)]="modal1" [transparent]="true" [footer]="footer">
+    <InputItem
+      [clear]="true"
+      [(ngModel)]="info.verifySite"
+      [placeholder]="'请输入取车地点'"
+      [moneyKeyboardAlign]="'left'"
+    >取车地点</InputItem>
+</Modal>

@@ -12,6 +12,8 @@ import { SharedModule } from './shared/shared.module';
 
 import { StartService } from './start.service';
 
+import { Modal, Toast } from 'ng-zorro-antd-mobile';
+
 
 export function StartupServiceFactory(
   startupService: StartService,
@@ -37,7 +39,7 @@ export function StartupServiceFactory(
          useFactory: StartupServiceFactory,
          deps: [StartService],
          multi: true,
-      }
+      },
    ],
    bootstrap: [
       AppComponent

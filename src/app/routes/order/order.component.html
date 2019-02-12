@@ -1,0 +1,100 @@
+<div class="body">
+<div class="container">
+    <div class="line order-line clearfix">
+        <div class="order">订单编号：{{info.code}}</div>
+        <div class="time">{{info.createTime}}</div>
+    </div>
+    <div class="order-status">
+        <!-- <div class="status" *ngIf="info.status < '2'">申请垫资金额: 
+          <span class="assign-color" *ngIf="info.totalCutPrice > 0">{{info.totalCutPrice}}</span>
+          <span class="assign-color" *ngIf="info.totalCutPrice == 0">电议</span>
+        </div>
+        <div class="tip" *ngIf="info.status < '2'">请向以下<span class="theme-color">银行账户进行汇款以保证取车进度</span></div>
+        
+        <div class="status" *ngIf="info.status > '1'">定金已汇款，金额<span class="assign-color">{{info.totalRePrice}}元</span></div>
+        <div class="tip" *ngIf="info.status > '1' && info.status != '5' ">车辆正在取车中，请耐心等待</div>
+        <div class="tip" *ngIf="info.status == '5' ">车辆已入库</div> -->
+    </div>
+    <div class="order-box fz24">
+        <div class="line">
+            <div class="title">客户信息</div>
+            <div class="des">{{info.user.realName}}</div>
+        </div>
+        <div class="line">
+            <div class="title">联系电话</div>
+            <div class="des">{{info.user.phone}}</div>
+        </div>
+        <div class="line">
+            <div class="title">待预付款</div>
+            <div class="des" style="color: #FF7800">{{info.totalPrice == 0 ? '价格电议' : info.totalRePrice}}<span *ngIf="info.totalPrice != 0">(全款{{info.totalPrice}})</span></div>
+        </div>
+    </div>
+
+    <div class="order-box fz24" style="margin-top: 15px">
+        <div class="line" Picker [(ngModel)]="ratio" [data]="select" cols="1" (ngModelChange)="onSelect($event)">
+            <div class="title">订单状态</div>
+            <div class="des" style="color: #274EFF">{{select[info.status].label}}</div>
+        </div>
+        <div class="line" (click)="modal1 = true">
+            <div class="title">物流时间</div>
+            <div class="des" style="color: #274EFF">{{info.arriveTime ? '预计' + info.arriveTime + '天' : '请选择'}}</div>
+        </div>
+        <div class="line" DatePicker [mode]="'datetime'" [minDate]="minDate" (onOk)="onOk1($event)">
+            <div class="title">验车时间</div>
+            <div class="des" style="color: #274EFF">{{info.verifyTime ? info.verifyTime : '请选择'}}</div>
+        </div>
+        <div class="line" (click)="modal2 = true">
+            <div class="title">验车地点</div>
+            <div class="des" style="color: #274EFF">{{info.verifySite ? info.verifySite : '请选择'}}</div>
+        </div>
+    </div>
+
+    <!-- <div class="border"></div> -->
+
+    <div class="list-box">
+        <div class="title">预定清单</div>
+        <div class="box" *ngFor="let i of cars;let index = index">
+          <div class="head">
+            <h4 class="left">{{i.modelName}}</h4>
+            <span class="right">指导价: {{i.guidePrice}}万</span>
+          </div>
+          <h5 class="line">外观: {{i.plasticColor}}  内饰: {{i.trimColor}}</h5>
+          <div class="stepper">
+            <div class="label" *ngIf="i.rePrice > 0"><span style="color: #FF7800;font-size: 16px">需预付: {{i.rePrice}}万</span> 全款{{i.price}}万</div>
+            <div class="label" *ngIf="i.rePrice == 0"><span style="color: #FF7800;font-size: 16px">电议</span></div>
+            <div class="set">
+              <!-- <div style="flex:1">
+                <img class="ic" (click)="del(index)" src="../../../assets/db/icon_decrease_nor.png"/>
+              </div> -->
+              <span style="flex: 1"> {{i.amount}}辆</span>
+              <!-- <div style="flex:1">
+                <img class="ic" (click)="add(index)" src="../../../assets/db/icon_incarease_nor.png"/>
+              </div> -->
+            </div>
+          </div>
+        </div>
+    </div>
+
+    
+</div>
+</div>
+
+
+<Modal [(ngModel)]="modal1" [transparent]="true" [footer]="footer">
+    <InputItem
+      [type]="'digit'"
+      [clear]="true"
+      [(ngModel)]="info.arriveTime"
+      [placeholder]="'请输入物流时间'"
+      [moneyKeyboardAlign]="'left'"
+    >物流时间</InputItem>
+</Modal>
+
+<Modal [(ngModel)]="modal2" [transparent]="true" [footer]="footer2">
+    <InputItem
+      [clear]="true"
+      [(ngModel)]="info.verifySite"
+      [placeholder]="'请输入验车地点'"
+      [moneyKeyboardAlign]="'left'"
+    >验车地点</InputItem>
+</Modal>
