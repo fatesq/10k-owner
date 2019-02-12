@@ -1,3 +1,4 @@
+<div style="position:relative;margin-bottom: 50px;">
 <div class="body">
 <div class="container">
     <div class="line order-line clearfix">
@@ -22,7 +23,7 @@
         </div>
         <div class="line">
             <div class="title">联系电话</div>
-            <div class="des">{{info.user.phone}}</div>
+            <div class="des" style="margin-right:auto">{{info.user.phone}} <a href="tel:{{info.user.phone}}"><div class="btn phone" style="font-size:14px">联系客户</div></a></div>
         </div>
         <div class="line">
             <div class="title">待预付款</div>
@@ -31,7 +32,7 @@
     </div>
 
     <div class="order-box fz24" style="margin-top: 15px">
-        <div class="line" Picker [(ngModel)]="ratio" [data]="select" cols="1" (ngModelChange)="onSelect($event)">
+        <div class="line" Picker [data]="select" cols="1" (ngModelChange)="onSelect($event)">
             <div class="title">订单状态</div>
             <div class="des" style="color: #274EFF">{{select[info.status].label}}</div>
         </div>
@@ -76,6 +77,10 @@
     </div>
 
     
+</div>
+</div>
+<div (click)="add()" style="text-align:center;position:fixed;width: 100%;bottom:0;background-color: #FFF;height: 40px;line-height: 40px;font-size: 20px">
+  <span style="color:#274EFF;font-weight:bold">提交</span>
 </div>
 </div>
 

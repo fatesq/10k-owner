@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { ApiService } from '../api.service';
 import * as moment from 'moment';
 
@@ -12,9 +12,17 @@ export class OrderComponent implements OnInit {
   code = '';
   info = {
     code: '',
+    totalPrice: 0,
     totalRePrice: '',
     createTime: '',
-    status: '',
+    status: 0,
+    arriveTime: '',
+    verifyTime: '',
+    verifySite: '',
+    user: {
+      realName: '',
+      phone: '',
+    }
   };
   cars = [];
   minDate = new Date();
@@ -32,7 +40,7 @@ export class OrderComponent implements OnInit {
     {
       text: '确认',
       onPress: () => {
-        this.updata({arriveTime: this.info['arriveTime']});
+        // this.updata({arriveTime: this.info['arriveTime']});
         this.modal1 = false;
       }
     }
@@ -41,7 +49,7 @@ export class OrderComponent implements OnInit {
     {
       text: '确认',
       onPress: () => {
-        this.updata({verifySite: this.info['verifySite']});
+        // this.updata({verifySite: this.info['verifySite']});
         this.modal2 = false;
       }
     }
@@ -49,6 +57,7 @@ export class OrderComponent implements OnInit {
   constructor(
     private api: ApiService,
     public activeRoute: ActivatedRoute,
+    private router: Router,
     // private _modal: Modal, private _toast: Toast
   ) { }
 
@@ -71,18 +80,30 @@ export class OrderComponent implements OnInit {
       code: this.code,
       ...data
     }).subscribe(res => {
-      this.getInfo();
+      // this.getInfo();
+      this.router.navigateByUrl(`/home/orderlist/0`);
     });
   }
 
   onOk1(result: Date) {
+    console.log(result)
     this.info['verifyTime'] = moment(result).format('YYYY-MM-DD HH:mm');
-    this.updata({verifyTime: moment(result).valueOf()});
+    console.log(this.info['verifyTime'])
+    // this.updata({verifyTime: moment(result).valueOf()});
   }
 
   onSelect(val) {
-    this.updata({status: val[0].value});
+    this.info['status'] = val[0].value;
+    // this.updata({status: val[0].value});
   }
 
+  add() {
+    this.updata({
+      verifyTime: moment(this.info['verifyTime']).valueOf(),
+      status: this.info['status'],
+      arriveTime: this.info['arriveTime'],
+      verifySite: this.info['verifySite']
+    });
+  }
 
 }

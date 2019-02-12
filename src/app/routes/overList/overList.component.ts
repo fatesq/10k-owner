@@ -27,7 +27,7 @@ export class OverListComponent implements OnInit {
   getInfo() {
     this.api.getOrderList({
       sid: localStorage['uid'],
-      status: 0
+      status: this.status
     }).subscribe(res => {
       console.log(res)
       if (res['code'] == 200) {

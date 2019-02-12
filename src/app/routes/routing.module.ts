@@ -10,11 +10,21 @@ import { OverComponent } from './over/over.component';
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent,
+  { path: 'home',
     children: [
-      { path: '', redirectTo: 'orderlist/0', pathMatch: 'full' },
-      { path: 'orderlist/:id', component: OrderListComponent },
-      { path: 'overlist/:id', component: OverListComponent }
+      { path: '', redirectTo: 'orderlist', pathMatch: 'full' },
+      { path: 'orderlist', component: HomeComponent,
+        children: [
+          { path: '', redirectTo: '0', pathMatch: 'full' },
+          {path: ':id', component: OrderListComponent }
+        ]
+      },
+      { path: 'overlist', component: HomeComponent,
+        children: [
+          { path: '', redirectTo: '0', pathMatch: 'full' },
+          {path: ':id', component: OverListComponent }
+        ]
+      },
     ]
   },
   { path: 'order', component: OrderComponent },

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import * as moment from 'moment';
 
@@ -12,13 +12,18 @@ export class OverComponent implements OnInit {
   code = '';
   info = {
     code: '',
+    totalPrice: 0,
     totalCutPrice: '',
     createTime: '',
-    status: '',
+    status: 0,
     saleName: '',
     salePhone: '',
     verifyTime: '',
-    verifySite: ''
+    verifySite: '',
+    user: {
+      realName: '',
+      phone: '',
+    }
   };
   cars = [];
   minDate = new Date();
@@ -35,14 +40,15 @@ export class OverComponent implements OnInit {
     {
       text: '确认',
       onPress: () => {
-        this.updata({arriveTime: this.info['arriveTime']});
+        // this.updata({arriveTime: this.info['arriveTime']});
         this.modal1 = false;
       }
     }
   ];
   constructor(
     private api: ApiService,
-    public activeRoute: ActivatedRoute
+    public activeRoute: ActivatedRoute,
+    private router: Router,
   ) {
     // history.pushState(null, null, document.URL);
     //   window.addEventListener('popstate',  () => {
@@ -66,7 +72,7 @@ export class OverComponent implements OnInit {
 
   onOk1(result: Date) {
     this.info['verifyTime'] = moment(result).format('YYYY-MM-DD HH:mm');
-    this.updata({verifyTime: moment(result).valueOf()});
+    // this.updata({verifyTime: moment(result).valueOf()});
   }
 
   updata(data) {
@@ -74,11 +80,22 @@ export class OverComponent implements OnInit {
       code: this.code,
       ...data
     }).subscribe(res => {
-      this.getInfo();
+      // this.getInfo();
+      // this.router.navigateByUrl(`/home/overlist/0`);
+      window.location.hash = '/home/overlist/0';
     });
   }
 
   onSelect(val) {
-    this.updata({status: val[0].value});
+    this.info['status'] = val[0].value;
+    // this.updata({status: val[0].value});
+  }
+
+  add() {
+    this.updata({
+      verifyTime: moment(this.info['verifyTime']).valueOf(),
+      status: this.info['status'],
+      verifySite: this.info['verifySite']
+    });
   }
 }

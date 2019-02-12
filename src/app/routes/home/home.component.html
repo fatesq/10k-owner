@@ -5,9 +5,7 @@
 <TabBar
   class="tab"
   [barTintColor]="'white'"
-  [tintColor]="tintColor"
-  [unselectedTintColor]="unselectedTintColor"
-  [activeTab]="0"
+  [activeTab]="indexTab"
   [tabBarPosition]="'bottom'"
 >
   <TabPane [title]='custom1'>
@@ -53,18 +51,17 @@
       </TabBarTab>
     </ng-template>
     <ng-container>
-      <ng-template [ngTemplateOutlet]="content"></ng-template>
+      <ng-template [ngTemplateOutlet]="content2"></ng-template>
     </ng-container>
   </TabPane>
 </TabBar>
 
 <ng-template #content>
   <Tabs
-    *ngIf="activeTab == 'orderlist'"
     style="height: 50px"
     [useOnPan]="true"
     [swipeable]="true"
-    [activeTab]="0"
+    [(activeTab)]="index"
     [page]="3"
     tabBarBackgroundColor="#274EFF"
     tabBarActiveTextColor="#FFF"
@@ -76,12 +73,15 @@
     <TabPane class="select" title="已付款订单"></TabPane>
     <TabPane class="select" title="已完成"></TabPane>
   </Tabs>
+  <router-outlet></router-outlet>
+</ng-template>
+
+<ng-template #content2>
   <Tabs
-    *ngIf="activeTab == 'overlist'"
     style="height: 50px"
     [useOnPan]="true"
     [swipeable]="true"
-    [(activeTab)]="index"
+    [(activeTab)]="index2"
     [page]="3"
     tabBarBackgroundColor="#274EFF"
     tabBarActiveTextColor="#FFF"
