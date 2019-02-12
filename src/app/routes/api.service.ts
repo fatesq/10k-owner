@@ -17,4 +17,8 @@ export class ApiService {
         return this.httpClient.post(`${api}/saleCms/login`, param);
     }
 
+    reserveList(param) {
+        return this.httpClient.post(`${api}/saleCms/reserveList`, param);
+    }
+
 }

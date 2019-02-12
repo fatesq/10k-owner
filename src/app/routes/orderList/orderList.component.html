@@ -1,11 +1,16 @@
 <div class="list">
-  <div class="item">
+  <div class="item" *ngFor="let i of list">
     <div class="header">
-      <div class="no">DF201845345323</div>
+      <div class="no">{{i.code}} {{i.createTime}}</div>
       <div class="status">已提交</div>
     </div>
     <div class="title">
-
+      <div>客户名 {{i.user.realName}}</div>
+      <div style="color:rgba(236,192,131,1);">待预付款: {{i.totalRePrice > 0 ? i.totalRePrice + '万': '价格电议'}}</div>
     </div>
+    <div class="info">
+      <p *ngFor="let o of i.orderCar">{{o.modelName}} x {{o.amount}} {{o.rePrice > 0 ? o.rePrice + '万': '价格电议'}}</p>
+    </div>
+    <h5 style="color:rgba(81,81,81,1);">业务员: {{i.saleName}}</h5>
   </div>
 </div>

@@ -7,7 +7,7 @@
   [barTintColor]="'white'"
   [tintColor]="tintColor"
   [unselectedTintColor]="unselectedTintColor"
-  [activeTab]="1"
+  [(activeTab)]="activeTab"
   [tabBarPosition]="'bottom'"
 >
   <TabPane [title]='custom1'>
@@ -40,6 +40,7 @@
         [key]="2"
         [icon]="icon2"
         [selectedIcon]="icon22"
+        (onPress)="onPress($event)"
       >
         <ng-template #icon2>
           <div style="width:22px;height: 22px;background: url('https://gw.alipayobjects.com/zos/rmsportal/BTSsmHkPsQSPTktcXyTV.svg') center center / 21px 21px no-repeat;">
@@ -58,10 +59,11 @@
 </TabBar>
 
 <ng-template #content>
-  <Tabs 
+  <Tabs
+    style="height: 50px"
     [useOnPan]="true"
     [swipeable]="true"
-    [activeTab]="index"
+    [(activeTab)]="index"
     [page]="3"
     tabBarBackgroundColor="#274EFF"
     tabBarActiveTextColor="#FFF"
