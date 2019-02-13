@@ -1,5 +1,6 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-home',
@@ -11,12 +12,15 @@ export class HomeComponent implements OnInit {
   index = 0;
   index2 = 0;
   indexTab = window.location.hash.indexOf('orderlist') > 0 ? 0 : 1;
+  name = '';
   constructor(
     private router: Router,
-    private zone: NgZone
+    private api: ApiService
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getOne();
+  }
 
 
   onPress(e) {
@@ -28,4 +32,18 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl(`/home/${this.activeTab}/${e.index}`);
   }
 
+  getOne() {
+      this.api.one().subscribe(res => {
+        if (res['code'] == 200) {
+          this.name = res['data'].name;
+        }
+      });
+  }
+  out() {
+    this.api.out().subscribe(res => {
+      if (res['code'] == 200) {
+        this.router.navigateByUrl(`/login`);
+      }
+    });
+  }
 }

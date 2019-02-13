@@ -40,4 +40,12 @@ export class ApiService {
     getOrderUpdate(param) {
         return this.httpClient.post(`${api}/getOrder/update`, param);
     }
+
+    out() {
+        return this.httpClient.get(`${api}/saleCms/out`);
+    }
+
+    one() {
+        return this.httpClient.get(`${api}/ownSaleman/one?sid=${localStorage['uid']}`);
+    }
 }
