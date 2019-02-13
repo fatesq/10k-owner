@@ -32,7 +32,7 @@
     </div>
 
     <div class="order-box fz24" style="margin-top: 15px">
-        <div class="line" Picker [data]="select" cols="1" (ngModelChange)="onSelect($event)">
+        <div class="line" Picker [(ngModel)]="info.status" [data]="select" cols="1" (ngModelChange)="onSelect($event)">
             <div class="title">订单状态</div>
             <div class="des" style="color: #274EFF">{{select[info.status].label}}</div>
         </div>

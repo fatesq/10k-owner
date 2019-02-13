@@ -23,7 +23,7 @@
     </div>
     <div class="order-box fz24" style="margin-top: 15px">
       <!-- <h3 style="padding: 10px 16px;font-size: 18px">取车信息</h3> -->
-      <div class="line" Picker [data]="select" cols="1" (ngModelChange)="onSelect($event)">
+      <div class="line" Picker [data]="select" [(ngModel)]="info.status" cols="1" (ngModelChange)="onSelect($event)">
           <div class="title">订单状态</div>
           <div class="des" style="color: #274EFF">{{select[info.status].label}}</div>
       </div>

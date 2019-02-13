@@ -87,6 +87,7 @@ export class OverComponent implements OnInit {
   }
 
   onSelect(val) {
+    console.log(val)
     this.info['status'] = val[0].value;
     // this.updata({status: val[0].value});
   }
