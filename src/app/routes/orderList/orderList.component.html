@@ -2,7 +2,7 @@
   <div class="item" *ngFor="let i of list"  routerLink="/order" [queryParams]='{code: i.code}'>
     <div class="header">
       <div class="no">{{i.code}} {{i.createTime}}</div>
-      <div class="status">已提交</div>
+      <div class="status">{{setType(i.status)}}</div>
     </div>
     <div class="title">
       <div>客户名 {{i.user.realName}}</div>

@@ -36,4 +36,31 @@ export class OverListComponent implements OnInit {
     });
   }
 
+  setType(key) {
+    let text = '';
+    switch (key) {
+      case 0:
+        text = '未付款';
+        break;
+      case 1:
+        text = '已付款';
+        break;
+      case 2:
+        text = '取车完成';
+        break;
+      case 3:
+        text = '已取消';
+        break;
+      case 4:
+        text = '退款中';
+        break;
+      case 5:
+        text = '退款完成';
+        break;
+      default:
+        break;
+    }
+    return text;
+  }
+
 }

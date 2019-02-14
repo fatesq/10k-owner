@@ -42,6 +42,7 @@ export class HomeComponent implements OnInit {
   out() {
     this.api.out().subscribe(res => {
       if (res['code'] == 200) {
+        localStorage.clear();
         this.router.navigateByUrl(`/login`);
       }
     });

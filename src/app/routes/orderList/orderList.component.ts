@@ -35,4 +35,31 @@ export class OrderListComponent implements OnInit {
     });
   }
 
+  setType(key) {
+    let text = '';
+    switch (key) {
+      case 0:
+        text = '未付款';
+        break;
+      case 1:
+        text = '买家已付款';
+        break;
+      case 2:
+        text = '订单已确认汇款';
+        break;
+      case 3:
+        text = '预约验车中';
+        break;
+      case 4:
+        text = '已预约验车';
+        break;
+      case 5:
+        text = '车辆已入库';
+        break;
+      default:
+        break;
+    }
+    return text;
+  }
+
 }
