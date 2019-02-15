@@ -29,6 +29,10 @@
             <div class="title">待预付款</div>
             <div class="des" style="color: #FF7800">{{info.totalPrice == 0 ? '价格电议' : info.totalRePrice}}<span *ngIf="info.totalPrice != 0">(全款{{info.totalPrice}})</span></div>
         </div>
+        <div class="line">
+          <div class="title">申请垫资</div>
+          <div class="des" style="color: #FF7800">{{info.totalPrice == 0 ? '价格电议' : info.totalCutPrice}}</div>
+        </div>
     </div>
 
     <div class="order-box fz24" style="margin-top: 15px">
@@ -47,6 +51,10 @@
         <div class="line" (click)="modal2 = true">
             <div class="title">验车地点</div>
             <div class="des" style="color: #274EFF">{{info.verifySite ? info.verifySite : '请选择'}}</div>
+        </div>
+        <div class="line" *ngIf="auth == 1" Picker [data]="ownerList" [(ngModel)]="saleMan" cols="1" (ngModelChange)="onSelectSale($event)">
+          <div class="title">业务员</div>
+          <div class="des" style="color: #274EFF">{{saleMan.label}}</div>
         </div>
     </div>
 

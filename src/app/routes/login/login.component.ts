@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
       if (res['code'] == 200) {
         localStorage['token'] = res['data'].token;
         localStorage['uid'] = res['data'].sid;
+        localStorage['auth'] = res['data'].auth;
         this.router.navigateByUrl(`/home`);
       } else {
         alert(res['description'] || res['msg']);

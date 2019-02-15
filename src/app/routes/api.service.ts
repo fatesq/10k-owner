@@ -48,4 +48,8 @@ export class ApiService {
     one() {
         return this.httpClient.get(`${api}/ownSaleman/one?sid=${localStorage['uid']}`);
     }
+
+    ownSaleman() {
+        return this.httpClient.get(`${api}/ownSaleman/all`);
+    }
 }

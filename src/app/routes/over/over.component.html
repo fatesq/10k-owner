@@ -17,7 +17,7 @@
           <div class="des">{{info.user.phone}} <div class="btn phone" style="font-size:14px">联系客户</div></div>
       </div>
       <div class="line">
-          <div class="title">已预付款</div>
+          <div class="title">需付尾款</div>
           <div class="des" style="color: #FF7800">{{info.totalPrice == 0 ? '价格电议' : info.totalCutPrice}}<span *ngIf="info.totalPrice != 0">(全款{{info.totalPrice}}万)</span></div>
       </div>
     </div>
@@ -34,6 +34,10 @@
       <div class="line" (click)="modal1 = true">
         <div class="title">取车地点</div>
         <div class="des" style="color: #274EFF">{{info.verifySite}}</div>
+      </div>
+      <div class="line" *ngIf="auth == 1" Picker [data]="ownerList" [(ngModel)]="saleMan" cols="1" (ngModelChange)="onSelectSale($event)">
+        <div class="title">业务员</div>
+        <div class="des" style="color: #274EFF">{{saleMan.label}}</div>
       </div>
     </div>
 

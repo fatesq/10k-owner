@@ -22,6 +22,7 @@ load(): Promise<any> {
         } else {
           localStorage['token'] = res['data'].token;
           localStorage['uid'] = res['data'].sid;
+          localStorage['auth'] = res['data'].auth;
           window.location.hash = '/home';
           resolve();
         }

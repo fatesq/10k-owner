@@ -10,6 +10,7 @@ import * as moment from 'moment';
 })
 export class OverComponent implements OnInit {
   code = '';
+  auth = localStorage['auth'];
   info = {
     code: '',
     totalPrice: 0,
@@ -35,6 +36,8 @@ export class OverComponent implements OnInit {
     {value: 4, label: '退款中'},
     {value: 5, label: '退款完成'},
   ];
+  ownerList = [];
+  saleMan = {};
   modal1 = false;
   footer = [
     {
@@ -60,6 +63,7 @@ export class OverComponent implements OnInit {
     this.activeRoute.queryParams.subscribe(params => {
       this.code = params['code'];
       this.getInfo();
+      this.getOwner();
     });
   }
 
@@ -67,6 +71,21 @@ export class OverComponent implements OnInit {
     this.api.getOrderDetail(this.code).subscribe(res => {
         this.info = res['data'].info;
         this.cars = res['data'].cars;
+        this.saleMan = {
+          value: this.info['sid'],
+          label: this.info['saleName']
+        };
+    });
+  }
+
+  getOwner() {
+    this.api.ownSaleman().subscribe(res => {
+      this.ownerList = res['data'].map(i => {
+        return {
+          value: i.id,
+          label: i.name,
+        };
+      });
     });
   }
 
@@ -91,12 +110,17 @@ export class OverComponent implements OnInit {
     this.info['status'] = val[0].value;
     // this.updata({status: val[0].value});
   }
+  onSelectSale(val) {
+    this.saleMan = val[0];
+  }
 
   add() {
     this.updata({
       verifyTime: moment(this.info['verifyTime']).valueOf(),
       status: this.info['status'],
-      verifySite: this.info['verifySite']
+      verifySite: this.info['verifySite'],
+      sid: this.saleMan['value'],
+      saleName: this.saleMan['label']
     });
   }
 }

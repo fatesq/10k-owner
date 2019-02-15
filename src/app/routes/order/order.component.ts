@@ -9,11 +9,13 @@ import * as moment from 'moment';
   styleUrls: ['./order.component.less'],
 })
 export class OrderComponent implements OnInit {
+  auth = localStorage['auth'];
   code = '';
   info = {
     code: '',
     totalPrice: 0,
     totalRePrice: '',
+    totalCutPrice: '',
     createTime: '',
     status: 0,
     arriveTime: '',
@@ -36,6 +38,8 @@ export class OrderComponent implements OnInit {
   ];
   modal1 = false;
   modal2 = false;
+  ownerList = [];
+  saleMan = {};
   footer = [
     {
       text: '确认',
@@ -65,6 +69,7 @@ export class OrderComponent implements OnInit {
     this.activeRoute.queryParams.subscribe(params => {
       this.code = params['code'];
       this.getInfo();
+      this.getOwner();
     });
   }
 
@@ -72,6 +77,21 @@ export class OrderComponent implements OnInit {
     this.api.reserveDetail(this.code).subscribe(res => {
         this.info = res['data'].info;
         this.cars = res['data'].cars;
+        this.saleMan = {
+          value: this.info['sid'],
+          label: this.info['saleName']
+        };
+    });
+  }
+
+  getOwner() {
+    this.api.ownSaleman().subscribe(res => {
+      this.ownerList = res['data'].map(i => {
+        return {
+          value: i.id,
+          label: i.name,
+        };
+      });
     });
   }
 
@@ -97,12 +117,19 @@ export class OrderComponent implements OnInit {
     // this.updata({status: val[0].value});
   }
 
+  onSelectSale(val) {
+    this.saleMan = val[0];
+  }
+
+
   add() {
     this.updata({
       verifyTime: moment(this.info['verifyTime']).valueOf(),
       status: this.info['status'],
       arriveTime: this.info['arriveTime'],
-      verifySite: this.info['verifySite']
+      verifySite: this.info['verifySite'],
+      sid: this.saleMan['value'],
+      saleName: this.saleMan['label']
     });
   }
 
