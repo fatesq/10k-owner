@@ -1,4 +1,4 @@
-<div style="position:relative;margin-bottom: 50px;">
+<div style="margin-bottom: 50px;">
 <div class="body">
 <div class="container">
     <div class="line order-line clearfix">
@@ -27,7 +27,7 @@
         </div>
         <div class="line">
             <div class="title">待预付款</div>
-            <div class="des" style="color: #FF7800">{{info.totalPrice == 0 ? '价格电议' : info.totalRePrice}}<span *ngIf="info.totalPrice != 0">(全款{{info.totalPrice}})</span></div>
+            <div class="des" style="color: #FF7800">{{info.totalPrice == 0 ? '价格电议' : info.totalRePrice}}<span *ngIf="info.totalPrice != 0">(全款{{info.totalPrice}}万)</span></div>
         </div>
         <div class="line">
           <div class="title">申请垫资</div>
