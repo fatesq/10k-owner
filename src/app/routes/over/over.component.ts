@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import * as moment from 'moment';
@@ -8,7 +8,7 @@ import * as moment from 'moment';
   templateUrl: './over.component.html',
   styleUrls: ['./over.component.less']
 })
-export class OverComponent implements OnInit {
+export class OverComponent implements OnInit, OnDestroy {
   code = '';
   auth = localStorage['auth'];
   info = {
@@ -65,6 +65,20 @@ export class OverComponent implements OnInit {
       this.getInfo();
       this.getOwner();
     });
+    window.addEventListener('resize', this.scrollChange);
+  }
+
+  ngOnDestroy() {
+    window.removeEventListener('resize', this.scrollChange);
+  }
+
+  scrollChange () {
+    const win_h = document.body.scrollHeight;
+    if (document.body.scrollHeight < win_h) {
+      document.getElementsByClassName('footer')[0]['style'].display = 'none';
+    } else {
+      document.getElementsByClassName('footer')[0]['style'].display = 'block';
+    }
   }
 
   getInfo() {

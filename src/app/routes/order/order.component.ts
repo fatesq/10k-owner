@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 import { ApiService } from '../api.service';
 import * as moment from 'moment';
@@ -8,7 +8,7 @@ import * as moment from 'moment';
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.less'],
 })
-export class OrderComponent implements OnInit {
+export class OrderComponent implements OnInit, OnDestroy {
   auth = localStorage['auth'];
   code = '';
   info = {
@@ -71,7 +71,22 @@ export class OrderComponent implements OnInit {
       this.getInfo();
       this.getOwner();
     });
+    window.addEventListener('resize', this.scrollChange);
   }
+
+  ngOnDestroy() {
+    window.removeEventListener('resize', this.scrollChange);
+  }
+
+  scrollChange () {
+    const win_h = document.body.scrollHeight;
+    if (document.body.scrollHeight < win_h) {
+      document.getElementsByClassName('footer')[0]['style'].display = 'none';
+    } else {
+      document.getElementsByClassName('footer')[0]['style'].display = 'block';
+    }
+  }
+
 
   getInfo() {
     this.api.reserveDetail(this.code).subscribe(res => {

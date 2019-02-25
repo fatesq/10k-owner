@@ -1,4 +1,4 @@
-<div style="margin-bottom: 50px;">
+<div style="position: relative; margin-bottom: 50px;">
 <div class="body">
 <div class="container">
     <div class="line order-line clearfix">
@@ -44,7 +44,7 @@
             <div class="title">物流时间</div>
             <div class="des" style="color: #274EFF">{{info.arriveTime ? '预计' + info.arriveTime + '天' : '请选择'}}</div>
         </div>
-        <div class="line" DatePicker [mode]="'datetime'" [minDate]="minDate" (onOk)="onOk1($event)">
+        <div class="line" DatePicker cols="4" [mode]="'datetime'" [minDate]="minDate" (onOk)="onOk1($event)">
             <div class="title">验车时间</div>
             <div class="des" style="color: #274EFF">{{info.verifyTime ? info.verifyTime : '请选择'}}</div>
         </div>
@@ -83,11 +83,9 @@
           </div>
         </div>
     </div>
-
-    
 </div>
 </div>
-<div (click)="add()" style="text-align:center;position:fixed;width: 100%;bottom:0;background-color: #FFF;height: 40px;line-height: 40px;font-size: 20px">
+<div class="footer" (click)="add()" style="text-align:center;position:fixed;width: 100%;bottom:0;background-color: #FFF;height: 40px;line-height: 40px;font-size: 20px">
   <span style="color:#274EFF;font-weight:bold">提交</span>
 </div>
 </div>
