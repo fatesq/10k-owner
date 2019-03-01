@@ -73,11 +73,16 @@
 </div>
 </div>
 
-<Modal [(ngModel)]="modal1" [transparent]="true" [footer]="footer">
+<Modal [(ngModel)]="modal1" [transparent]="true">
+    <h3 class="tth">取车地点</h3>
     <InputItem
       [clear]="true"
       [(ngModel)]="info.verifySite"
-      [placeholder]="'请输入取车地点'"
+      [placeholder]="'请输入约定的取车地点'"
       [moneyKeyboardAlign]="'left'"
-    >取车地点</InputItem>
+    ></InputItem>
+    <div class="ttf"> 
+        <div class="cc" (click)="onPress1()">取消</div>
+        <div class="aa" (click)="onPress1()">确定</div>
+      </div>
 </Modal>

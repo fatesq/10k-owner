@@ -78,6 +78,16 @@ export class OrderComponent implements OnInit, OnDestroy {
     window.removeEventListener('resize', this.scrollChange);
   }
 
+  onPress1() {
+    // this.updata({verifySite: this.info['verifySite']});
+    this.modal1 = false;
+  }
+
+  onPress2() {
+    // this.updata({verifySite: this.info['verifySite']});
+    this.modal2 = false;
+  }
+
   scrollChange () {
     const win_h = document.body.scrollHeight;
     if (document.body.scrollHeight < win_h) {
@@ -122,7 +132,7 @@ export class OrderComponent implements OnInit, OnDestroy {
 
   onOk1(result: Date) {
     console.log(result)
-    this.info['verifyTime'] = moment(result).format('YYYY-MM-DD HH:mm');
+    this.info['verifyTime'] = moment(result).format('YYYY-MM-DD HH');
     console.log(this.info['verifyTime'])
     // this.updata({verifyTime: moment(result).valueOf()});
   }

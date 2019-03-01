@@ -91,21 +91,31 @@
 </div>
 
 
-<Modal [(ngModel)]="modal1" [transparent]="true" [footer]="footer">
+<Modal [(ngModel)]="modal1" [transparent]="true" [maskClosable]="true">
+    <h3 class="tth">物流时间</h3>
     <InputItem
       [type]="'digit'"
       [clear]="true"
       [(ngModel)]="info.arriveTime"
       [placeholder]="'请输入物流时间'"
       [moneyKeyboardAlign]="'left'"
-    >物流时间</InputItem>
+    ></InputItem>
+    <div class="ttf"> 
+      <div class="cc" (click)="onPress1()">取消</div>
+      <div class="aa" (click)="onPress1()">确定</div>
+    </div>
 </Modal>
 
-<Modal [(ngModel)]="modal2" [transparent]="true" [footer]="footer2">
+<Modal [(ngModel)]="modal2" [transparent]="true">
+    <h3 class="tth">验车地点</h3>
     <InputItem
       [clear]="true"
       [(ngModel)]="info.verifySite"
-      [placeholder]="'请输入验车地点'"
+      [placeholder]="'请输入约定的验车地点'"
       [moneyKeyboardAlign]="'left'"
-    >验车地点</InputItem>
+    ></InputItem>
+    <div class="ttf"> 
+        <div class="cc" (click)="onPress2()">取消</div>
+        <div class="aa" (click)="onPress2()">确定</div>
+      </div>
 </Modal>

@@ -104,10 +104,14 @@ export class OverComponent implements OnInit, OnDestroy {
   }
 
   onOk1(result: Date) {
-    this.info['verifyTime'] = moment(result).format('YYYY-MM-DD HH:mm');
+    this.info['verifyTime'] = moment(result).format('YYYY-MM-DD HH');
     // this.updata({verifyTime: moment(result).valueOf()});
   }
 
+  onPress1() {
+    // this.updata({verifySite: this.info['verifySite']});
+    this.modal1 = false;
+  }
   updata(data) {
     this.api.getOrderUpdate({
       code: this.code,
